@@ -47,4 +47,20 @@ const clerkWeebhooks=async(req,res)=>{
       res.json({success:false,message:err.message})
     }
 }
-export {clerkWeebhooks}
+
+
+//api controller function to get user available credits info
+
+const userCredits=async(req,res)=>{
+  try{
+    const {clerkId}=req.body;
+    const userData=await userModel.findOne({clerkId})
+    res.json({success:true,credits:userData.creditBalance})
+  }
+  catch(err){
+    console.log(err)
+    res.json({success:false,message:err.message})
+  }
+}
+
+export {clerkWeebhooks,userCredits}
